@@ -1,0 +1,8 @@
+cd d:\TFG\Canbus-Raspberry
+pip install -r requirements.txt
+python server.py
+
+
+o
+
+python -m pip install python-socketio python-engineio requests

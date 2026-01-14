@@ -1,3 +1,11 @@
 python-socketio==5.10.0
 python-engineio==4.8.0
 requests==2.31.0
+# OpenCV para captura de cámara
+opencv-python==4.8.1.78
+
+# YOLOv8 para detección de objetos
+ultralytics==8.0.208
+
+# Utilidades
+numpy==1.24.3

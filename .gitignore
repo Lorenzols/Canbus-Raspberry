@@ -1,0 +1,68 @@
+# Videos grabados
+videos_grabados/
+*.mp4
+*.avi
+*.mov
+
+# Modelos YOLOv8 (son muy grandes)
+*.pt
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Entorno local
+.env
+.env.local
+.env.*.local
+
+# Socket.IO/Node
+node_modules/
+npm-debug.log
+
+# Configuración de usuario
+config.local.js
+settings.local.json
+
+# Archivos temporales
+.tmp/
+temp/
+*.tmp
+
+# Ultralytics settings (config personal)
+.ultralytics/

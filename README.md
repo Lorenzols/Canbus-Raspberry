@@ -64,27 +64,6 @@ sudo supervisorctl update
 sudo supervisorctl start canbus
 ```
 
-## 📊 Salida esperada
-
-```
-🚀 Servidor Raspberry Pi iniciado
-🔗 Conectando a backend: http://192.168.0.79:3000
-🚗 ID del coche: CITROEN_C4_001
-
-✅ Conectado al backend
-📍 Registrado como coche: CITROEN_C4_001
-
-📥 Comando ventana recibido: {'ventanaId': 'ventana_conductor', 'accion': 'bajar'}
-
-🚗 Ejecutando acción: BAJAR
-📍 Ventana: Ventana Conductor (Delantera Izquierda)
-📊 ID CAN: 14C
-📤 Datos CAN: 8080000080
-⚙️ Comando: cangen can0 -g 2 -I 14C -L 5 -D 8080000080 -n 25
-
-✅ [SIMULACIÓN] Comando CAN ejecutado correctamente
-```
-
 ## 🔧 Configuración de CAN Bus en Raspberry Pi
 
 ### Habilitar CAN0
@@ -121,38 +100,6 @@ Prueba:
 ```bash
 cangen can0 -g 2 -I 14C -L 5 -D 8080000080 -n 1
 ```
-
-## ⚠️ Notas importantes
-
-1. **Testing sin hardware CAN**: El servidor funciona en modo simulación. Solo loguea los comandos sin ejecutarlos.
-
-2. **Ejecutar en Raspberry real**: Descomenta la línea en `ejecutar_comando_can()`:
-   ```python
-   subprocess.run(comando, shell=True, check=True)
-   ```
-
-3. **Verifica la IP del backend** antes de ejecutar
-
-4. **Logs**: Revisa la salida para diagnosticar problemas
-
-## 🐛 Troubleshooting
-
-**Error: "No module named 'socketio'"**
-```bash
-pip install python-socketio
-```
-
-**Error de conexión al backend**
-- Verifica que la IP y puerto sean correctos
-- Comprueba que el backend está ejecutándose
-- Verifica la conexión de red
-
-**Comando CAN no se ejecuta**
-- Debes estar en una Raspberry Pi real con CAN Bus configurado
-- Descomenta la línea de `subprocess.run()` en el código
-- Verifica que `cangen` está instalado: `which cangen`
-
-## 📞 Soporte
 
 Para más información sobre Socket.IO en Python:
 https://python-socketio.readthedocs.io/

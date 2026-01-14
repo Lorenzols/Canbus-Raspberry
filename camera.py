@@ -141,14 +141,23 @@ class CameraManager:
                     if clase_nombre in CLASES_DETECTAR:
                         x1, y1, x2, y2 = map(int, box.xyxy[0])
                         
-                        # Dibujar rectángulo
+                        # Dibujar rectángulo con más grosor para mejor visibilidad
                         color = (0, 255, 0) if clase_nombre == 'person' else (255, 0, 0)
-                        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+                        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 3)  # Grosor 3 en lugar de 2
                         
-                        # Dibujar etiqueta
+                        # Dibujar etiqueta con fondo oscuro para mejor legibilidad
                         etiqueta = f'{clase_nombre} {confianza:.2f}'
-                        cv2.putText(frame, etiqueta, (x1, y1 - 10),
-                                  cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                        text_size = cv2.getTextSize(etiqueta, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)[0]
+                        
+                        # Fondo para el texto
+                        cv2.rectangle(frame, 
+                                    (x1, y1 - text_size[1] - 10),
+                                    (x1 + text_size[0], y1),
+                                    color, -1)  # -1 para rellenar
+                        
+                        # Texto blanco
+                        cv2.putText(frame, etiqueta, (x1, y1 - 5),
+                                  cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                         
                         detecciones.append({
                             'clase': clase_nombre,
@@ -228,11 +237,11 @@ class CameraManager:
                     
                     frame_count += 1
                     
-                    # Procesar con YOLOv8 cada N frames (para optimizar)
+                    # Procesar con YOLOv8 en CADA frame para detección consistente
                     frame_procesado = frame.copy()
                     detecciones = []
                     
-                    if frame_count % 2 == 0 and self.modelo is not None:  # Cada 2 frames
+                    if self.modelo is not None:  # Detectar en cada frame
                         frame_procesado, detecciones = self.detectar_objetos(frame)
                     
                     # Actualizar estado
